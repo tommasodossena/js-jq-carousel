@@ -10,32 +10,31 @@ Generiamo i pallini con JS
 */
 
 // FUNZIONI
-// Funzione immagine precedente carosello
-function prevImage() {
+// Funzione slide precedente carosello
+function carouselPrev() {
     // 1A - Variabile che seleziona l'immagine con la classe active e la rimuove
-    var imgActive = $(".active");
-    imgActive.removeClass("active");
+    var currentSlide = $(".slider-wrapper .active");
+    currentSlide.removeClass("active");
     // 2A - Se l'immagine con la classe active ha la classe first, devo applicare la classe active all'ultima immagine. 
-    if ( imgActive.hasClass("first") == false ) {
-        imgActive.prev().addClass("active");   
+    if ( currentSlide.hasClass("first") == false ) {
+        currentSlide.prev().addClass("active");   
     } else {
         $(".last").addClass("active");  
     }
 }
 
-// Funzione immagine successiva carosello
-function nextImage() {
+// Funzione slide successiva carosello
+function carouselNext() {
     // 1B - Variabile che seleziona l'immagine con la classe active e la rimuove
-    var imgActive = $(".active");
-    imgActive.removeClass("active");
+    var currentSlide = $(".slider-wrapper .active");
+    currentSlide.removeClass("active");
     // 2B - Se l'immagine con la classe active ha la classe last, devo applicare la classe active alla prima immagine. 
-    if ( imgActive.hasClass("last") == false ) {
-        imgActive.next().addClass("active");   
+    if ( currentSlide.hasClass("last") == false ) {
+        currentSlide.next().addClass("active");   
     } else {
         $(".first").addClass("active");  
     }
 }
-
 
 // 0 - $(document).ready()
 $(function() {
@@ -43,14 +42,14 @@ $(function() {
     // 1 - Al click sulla freccia sinistra, mostrare l'immagine precedente
     $(".prev").click(
         function() {
-            prevImage();
+            carouselPrev();
         }
     );
 
     // 2 - Al click sulla freccia destra, mostrare l'immagine successiva
     $(".next").click(
         function() {
-            nextImage();
+            carouselNext();
         }
     );
    
@@ -58,10 +57,25 @@ $(function() {
     $(document).keydown(
         function (e) {
             if ( e.keyCode == 39 ) {
-                nextImage();
+                carouselNext();
             } else if ( e.keyCode == 37 ) { 
-                prevImage();
+                carouselPrev();
             }
+        }
+    );
+
+    // 4 - Cliccando sui pallini visualizzare la relativa immagine
+    $(".nav .fa-circle").click(
+        function () {
+            var clicked = $(this).index();
+            var currentSlide = $(".images img.active");
+            var currentBullet = $(".nav i.active");
+
+            currentSlide.removeClass("active");
+            $(".images img").eq(clicked).addClass("active");
+
+            currentBullet.removeClass("active");
+            $(this).addClass("active");
         }
     );
 
