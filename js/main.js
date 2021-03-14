@@ -17,9 +17,9 @@ function carouselPrev() {
     currentSlide.removeClass("active");
     // 2A - Se l'immagine con la classe active ha la classe first, devo applicare la classe active all'ultima immagine. 
     if ( currentSlide.hasClass("first") == false ) {
-        currentSlide.prev().addClass("active");   
+        currentSlide.prev().addClass("active");
     } else {
-        $(".last").addClass("active");  
+        $(".last").addClass("active");
     }
 }
 
@@ -30,9 +30,9 @@ function carouselNext() {
     currentSlide.removeClass("active");
     // 2B - Se l'immagine con la classe active ha la classe last, devo applicare la classe active alla prima immagine. 
     if ( currentSlide.hasClass("last") == false ) {
-        currentSlide.next().addClass("active");   
+        currentSlide.next().addClass("active");
     } else {
-        $(".first").addClass("active");  
+        $(".first").addClass("active");
     }
 }
 
