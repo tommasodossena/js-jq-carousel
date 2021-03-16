@@ -12,10 +12,10 @@ Generiamo i pallini con JS
 // FUNZIONI
 // Funzione slide precedente carosello
 function carouselPrev() {
-    // 1A - Variabile che seleziona l'immagine con la classe active e la rimuove
+    // 1A - Variabile che seleziona gli elementi del carousel con la classe active e li rimuove
     var currentSlide = $(".slider-wrapper .active");
     currentSlide.removeClass("active");
-    // 2A - Se l'immagine con la classe active ha la classe first, devo applicare la classe active all'ultima immagine. 
+    // 2A - Se gli elementi del carousel con la classe active hanno la classe first, devo applicare la classe active agli elementi con la classe last
     if ( currentSlide.hasClass("first") == false ) {
         currentSlide.prev().addClass("active");
     } else {
@@ -25,10 +25,10 @@ function carouselPrev() {
 
 // Funzione slide successiva carosello
 function carouselNext() {
-    // 1B - Variabile che seleziona l'immagine con la classe active e la rimuove
+    // 1B - Variabile che gli elementi del carousel con la classe active e li rimuove
     var currentSlide = $(".slider-wrapper .active");
     currentSlide.removeClass("active");
-    // 2B - Se l'immagine con la classe active ha la classe last, devo applicare la classe active alla prima immagine. 
+    // 2B - Se gli elementi del carousel con la classe active hanno la classe last, devo applicare la classe active agli elementi con la classe first
     if ( currentSlide.hasClass("last") == false ) {
         currentSlide.next().addClass("active");
     } else {
@@ -56,9 +56,9 @@ $(function() {
     // 3 - Premendo le frecce direzionali sulla tastiera l'immagine cambia
     $(document).keydown(
         function (e) {
-            if ( e.keyCode == 39 ) {
+            if ( e.which == 39 ) {
                 carouselNext();
-            } else if ( e.keyCode == 37 ) { 
+            } else if ( e.which == 37 ) { 
                 carouselPrev();
             }
         }
@@ -79,4 +79,7 @@ $(function() {
         }
     );
 
+    // 5 - Autoplay: l'immagine passa a quella successiva ogni 4 secondi
+    setInterval("carouselNext()", 4000);
+    
 });
